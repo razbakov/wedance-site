@@ -31,6 +31,7 @@ export default async function handler(req, res) {
       res.status(403).send(deniedPage(user));
       return;
     }
+    console.log('[callback] ok user=%s sealedLen=%d', user && user.email, (sealedSession || '').length);
     setSessionCookie(res, sealedSession);
     res.writeHead(302, { Location: '/team' });
     res.end();
