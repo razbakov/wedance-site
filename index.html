@@ -95,6 +95,25 @@ a:hover{color:#b91c1c}
   .nav{gap:.9rem}.nav a:not(.app){display:none}
   .section{padding:3rem 0}
 }
+/* living-document commenting */
+[data-c]{position:relative}
+[data-c].c-hot{outline:2px solid #dc262633;outline-offset:4px;border-radius:8px}
+.cbtn{position:absolute;z-index:60;width:30px;height:30px;border-radius:50%;border:none;cursor:pointer;background:#fff;border:1px solid var(--border);box-shadow:0 4px 12px rgba(59,31,18,.12);font-size:14px;line-height:1;display:none;align-items:center;justify-content:center;transition:transform .15s}
+.cbtn:hover{transform:scale(1.1);border-color:var(--red)}
+.cbtn.show{display:flex}
+.cpop{position:absolute;z-index:70;width:320px;max-width:88vw;background:#fff;border:1px solid var(--border);border-radius:14px;box-shadow:0 12px 40px rgba(59,31,18,.18);padding:1rem;font-family:Inter,sans-serif}
+.cpop .quote{font-size:.82rem;color:var(--amber);font-style:italic;border-left:2px solid #dc262655;padding-left:.6rem;margin-bottom:.6rem;max-height:3.2em;overflow:hidden}
+.cpop textarea,.cpop input{width:100%;border:1px solid var(--border);border-radius:8px;padding:.55rem .65rem;font-size:.9rem;font-family:inherit;background:var(--cream);color:var(--ink);outline:none;margin-bottom:.5rem}
+.cpop textarea{min-height:70px;resize:vertical}
+.cpop .row{display:flex;gap:.5rem;align-items:center;justify-content:space-between}
+.cpop .send{background:linear-gradient(135deg,var(--red),#f97316);color:#fff;border:none;border-radius:999px;padding:.5rem 1rem;font-weight:700;font-size:.85rem;cursor:pointer}
+.cpop .send:disabled{opacity:.5;cursor:default}
+.cpop .x{background:none;border:none;color:var(--amber);cursor:pointer;font-size:.82rem}
+.cpop .hint{font-size:.72rem;color:var(--amber);margin-top:.4rem}
+.ctoast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(20px);z-index:200;background:var(--ink);color:var(--cream);padding:.7rem 1.1rem;border-radius:999px;font-size:.88rem;font-family:Inter,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.25);opacity:0;transition:all .3s;pointer-events:none}
+.ctoast.show{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
+.ctoast a{color:#ffd9a8;font-weight:700}
+.cnote{text-align:center;font-size:.82rem;color:var(--amber);margin-top:1.25rem;font-family:Inter,sans-serif}
 </style>
 </head>
 <body>
@@ -267,6 +286,67 @@ a:hover{color:#b91c1c}
   var g=document.querySelector('.rays g'); if(!g) return;
   for(var i=0;i<24;i++){var a=2*Math.PI*i/24,l=document.createElementNS('http://www.w3.org/2000/svg','line');
     l.setAttribute('x1',50);l.setAttribute('y1',50);l.setAttribute('x2',50+48*Math.cos(a));l.setAttribute('y2',50+48*Math.sin(a));g.appendChild(l);}
+})();
+
+// living-document commenting → files a Linear Triage issue
+(function(){
+  // tag commentable blocks
+  var sel = '.hero h1, .lead, .card, .layer, .value, .section > .container > h2';
+  document.querySelectorAll(sel).forEach(function(el){
+    el.setAttribute('data-c','');
+    var sec = el.closest('section');
+    var label = sec ? (sec.querySelector('.kicker')?.textContent || sec.id || 'document') : 'document';
+    el.setAttribute('data-section', label.trim());
+  });
+  // add the hint under hero
+  var sub = document.querySelector('.hero .sub');
+  if(sub){var n=document.createElement('div');n.className='cnote';n.innerHTML='💬 Hover any passage and comment — objections file straight into our Linear triage.';sub.after(n);}
+
+  var btn=document.createElement('button');btn.className='cbtn';btn.textContent='💬';btn.title='Comment';document.body.appendChild(btn);
+  var toast=document.createElement('div');toast.className='ctoast';document.body.appendChild(toast);
+  var cur=null, pop=null;
+
+  function place(el){var r=el.getBoundingClientRect();btn.style.top=(window.scrollY+r.top-6)+'px';btn.style.left=(window.scrollX+r.right-8)+'px';}
+  document.addEventListener('mouseover',function(e){var el=e.target.closest('[data-c]');if(!el||pop)return;cur=el;place(el);btn.classList.add('show');});
+  document.addEventListener('mouseout',function(e){var el=e.target.closest('[data-c]');if(el&&!pop&&!e.relatedTarget?.closest?.('.cbtn')){setTimeout(function(){if(!btn.matches(':hover')&&!pop)btn.classList.remove('show');},120);}});
+  window.addEventListener('scroll',function(){if(cur&&!pop)place(cur);});
+
+  function showToast(html,ms){toast.innerHTML=html;toast.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(function(){toast.classList.remove('show');},ms||6000);}
+  function closePop(){if(pop){pop.remove();pop=null;}btn.classList.remove('show');if(cur)cur.classList.remove('c-hot');}
+
+  btn.addEventListener('click',function(){
+    if(!cur)return;var el=cur;el.classList.add('c-hot');
+    var quote=(el.textContent||'').trim().replace(/\s+/g,' ').slice(0,220);
+    var section=el.getAttribute('data-section')||'document';
+    closePopOnly();
+    pop=document.createElement('div');pop.className='cpop';
+    pop.innerHTML='<div class="quote">'+quote.slice(0,140)+(quote.length>140?'…':'')+'</div>'+
+      '<input class="who" placeholder="Your name (optional)">'+
+      '<textarea class="txt" placeholder="Your comment or objection…"></textarea>'+
+      '<div class="row"><button class="x">Cancel</button><button class="send" disabled>Send to triage →</button></div>'+
+      '<div class="hint">Files a triage issue in Linear (team WeDance).</div>';
+    document.body.appendChild(pop);
+    var r=el.getBoundingClientRect();
+    var top=window.scrollY+r.top; var left=window.scrollX+Math.min(r.right+10,window.innerWidth-340);
+    if(left<8)left=8; pop.style.top=top+'px';pop.style.left=left+'px';
+    var txt=pop.querySelector('.txt'),send=pop.querySelector('.send'),who=pop.querySelector('.who');
+    txt.focus();
+    txt.addEventListener('input',function(){send.disabled=!txt.value.trim();});
+    pop.querySelector('.x').addEventListener('click',closePop);
+    send.addEventListener('click',function(){
+      send.disabled=true;send.textContent='Sending…';
+      fetch('/api/comment',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({quote:quote,section:section,comment:txt.value.trim(),commenter:who.value.trim()||'Anonymous'})})
+        .then(function(r){return r.json();})
+        .then(function(d){closePop();
+          if(d&&d.ok){showToast('✓ Filed to triage — <a href="'+d.url+'" target="_blank">'+d.identifier+'</a>');}
+          else{showToast('Couldn’t file it: '+((d&&d.error)||'error')+'. Try again shortly.',7000);}})
+        .catch(function(){closePop();showToast('Network error — please try again.',6000);});
+    });
+    function closePopOnly(){if(pop){pop.remove();pop=null;}}
+    setTimeout(function(){document.addEventListener('mousedown',outside);},0);
+    function outside(ev){if(pop&&!pop.contains(ev.target)&&ev.target!==btn){document.removeEventListener('mousedown',outside);closePop();}}
+  });
 })();
 </script>
 </body>
