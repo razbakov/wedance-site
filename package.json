@@ -1,0 +1,10 @@
+{
+  "name": "wedance-org",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "WeDance living org doc — public + WorkOS-gated team layer.",
+  "dependencies": {
+    "@workos-inc/node": "^7.51.0"
+  }
+}
