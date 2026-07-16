@@ -1,5 +1,5 @@
 // Protected team room. Requires a valid WorkOS session; otherwise → login.
-import { getSession, allowlistActive } from '../lib/workos.js';
+import { getSession, allowlistActive, configured } from '../lib/workos.js';
 
 function esc(s = '') {
   return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -123,6 +123,16 @@ a{color:var(--red);text-decoration:none}a:hover{color:#b91c1c}
 }
 
 export default async function handler(req, res) {
+  if (!configured) {
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.status(503).send(`<!doctype html><meta charset=utf-8><title>Team room — setup pending</title>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<style>body{font-family:Inter,system-ui,sans-serif;background:#fbf5ea;color:#3b1f0d;display:grid;place-items:center;min-height:100vh;margin:0;text-align:center}.b{max-width:420px;padding:2rem}h1{font-family:'Playfair Display',Georgia,serif}a{color:#dc2626;font-weight:700}</style>
+<div class=b><div style="font-size:2.4rem">🔧</div><h1>Team room is being wired up</h1>
+<p>Google SSO isn't connected yet. Check back shortly.</p>
+<p style="margin-top:1.25rem"><a href="/">← Public doc</a></p></div>`);
+    return;
+  }
   const session = await getSession(req, res);
   if (!session.authenticated) {
     res.writeHead(302, { Location: '/api/auth/login' });
