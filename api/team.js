@@ -34,6 +34,8 @@ a{color:var(--red);text-decoration:none}a:hover{color:#b91c1c}
 .who b{color:var(--ink)}
 .who a.out{border:1.5px solid var(--border);border-radius:999px;padding:.32rem .8rem;color:var(--ink);font-weight:600}
 .who a.out:hover{border-color:var(--red);color:var(--red)}
+.who a.app{color:#fff;background:linear-gradient(135deg,var(--red),#f97316);border-radius:999px;padding:.34rem .9rem;font-weight:700;box-shadow:0 3px 0 -1px #b91c1c}
+.who a.app:hover{color:#fff;transform:translateY(-1px)}
 .hero{padding:3.5rem 0 1.5rem}
 .eyebrow{font-family:'Caveat',cursive;font-size:1.4rem;color:var(--red)}
 .hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:2.4rem;letter-spacing:-.02em;margin:.2rem 0 .5rem}
@@ -61,7 +63,8 @@ a{color:var(--red);text-decoration:none}a:hover{color:#b91c1c}
 <header class="header"><div class="container">
   <div class="logo"><span class="dot"></span>WeDance<span class="tag">team</span></div>
   <div class="who"><span class="em">Signed in as <b>${name}</b>${email ? ` · ${email}` : ''}</span>
-    <a class="out" href="/api/auth/logout">Log out</a></div>
+    <a class="out" href="/api/auth/logout">Log out</a>
+    <a class="app" href="https://2026.wedance.vip">Open the app</a></div>
 </div></header>
 
 <section class="hero"><div class="container">
