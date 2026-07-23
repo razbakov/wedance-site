@@ -4,6 +4,9 @@
   "private": true,
   "type": "module",
   "description": "WeDance living org doc — public + WorkOS-gated team layer.",
+  "scripts": {
+    "build:roles": "node scripts/build-roles.mjs"
+  },
   "dependencies": {
     "@workos-inc/node": "^7.51.0"
   }
