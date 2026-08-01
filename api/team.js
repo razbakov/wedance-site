@@ -104,6 +104,7 @@ a{color:var(--red);text-decoration:none}a:hover{color:#b91c1c}
     <div class="team card"><h4>Alex's team</h4><ul>
       <li><b>Product Lead</b><span class="hold">Alex Razbakov</span></li>
       <li><b>Engineer</b><span class="hold">Alex + agents</span></li>
+      <li><b><a href="/team/product-steward">Product Steward →</a></b><span class="hold">Vitaly · trial</span></li>
       <li><b>Operations Manager</b><span class="hold">Autopilot</span></li>
     </ul></div>
     <div class="team card"><h4>Kirill's team</h4><ul>

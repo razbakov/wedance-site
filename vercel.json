@@ -1,6 +1,7 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/team", "destination": "/api/team" }
+    { "source": "/team", "destination": "/api/team" },
+    { "source": "/team/product-steward", "destination": "/api/team-product-steward" }
   ]
 }
