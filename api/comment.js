@@ -1,7 +1,10 @@
 // Living-document comment → Linear Triage issue.
-// POST { quote, section, comment, commenter } → creates an issue in team WED's
-// Triage with the `objection` label. Uses LINEAR_API_KEY (Personal API key).
-const TEAM_ID = '9fc5052b-a799-4b60-99b5-300512ddd275'; // Wedance (WED)
+// POST { quote, section, comment, commenter, file?, page? } → creates an issue in
+// the team's Triage with the `objection` label. `file` is the source path in
+// razbakov/wedance-org, so whoever resolves it knows which file the PR changes.
+// Uses LINEAR_API_KEY (Personal API key).
+const TEAM_ID = '9fc5052b-a799-4b60-99b5-300512ddd275'; // Alösha AI (RAZ), formerly WED
+const ORG_REPO = 'https://github.com/razbakov/wedance-org';
 
 async function linear(query, variables) {
   const r = await fetch('https://api.linear.app/graphql', {
@@ -42,14 +45,23 @@ export default async function handler(req, res) {
     const comment = (body.comment || '').toString().slice(0, 4000).trim();
     const section = (body.section || 'the document').toString().slice(0, 120);
     const commenter = (body.commenter || 'Anonymous').toString().slice(0, 120);
+    const file = /^[\w.\-/ ]{1,200}$/.test(body.file || '') && !String(body.file).includes('..') ? String(body.file) : '';
+    const page = /^\/docs\/[^\s]{0,300}$/.test(body.page || '') ? String(body.page) : '';
     if (!comment) return res.status(400).json({ error: 'comment required' });
 
-    const title = `Comment: ${(quote || section).slice(0, 70)}${(quote || section).length > 70 ? '…' : ''}`;
+    const where = file ? file.split('/').pop() : section;
+    const subject = quote || section;
+    const title = `Comment on ${where}: ${subject.slice(0, 60)}${subject.length > 60 ? '…' : ''}`;
+    const fileUrl = file ? `${ORG_REPO}/blob/main/${file.split('/').map(encodeURIComponent).join('/')}` : '';
     const description = [
-      `**${commenter}** commented on the living org doc (§ ${section}):`,
+      `**${commenter}** commented on ${file ? `\`${file}\`` : 'the living org doc'} (§ ${section}):`,
       '', `> ${comment}`, '',
       quote ? `Passage:\n> ${quote}` : '',
-      '', `---`, `Filed from org.wedance.vip · triage per Sociocracy 3.0 (raise → resolve objections).`,
+      file ? `\nSource: [${file}](${fileUrl}) · [live page](https://org.wedance.vip${page}) · [propose edit](${ORG_REPO}/edit/main/${file})` : '',
+      '', `---`,
+      file
+        ? `Filed from org.wedance.vip · resolve per Sociocracy 3.0: if the change is accepted, open a PR against \`${file}\` in razbakov/wedance-org and link it here.`
+        : `Filed from org.wedance.vip · triage per Sociocracy 3.0 (raise → resolve objections).`,
     ].filter(Boolean).join('\n');
 
     const [labelId, stateId] = await Promise.all([ensureLabel().catch(() => null), triageStateId().catch(() => null)]);

@@ -3,11 +3,15 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "WeDance living org doc — public + WorkOS-gated team layer.",
+  "description": "WeDance living org doc \u2014 public + WorkOS-gated team layer.",
   "scripts": {
-    "build:roles": "node scripts/build-roles.mjs"
+    "build:roles": "node scripts/build-roles.mjs",
+    "build:docs": "node scripts/build-docs.mjs",
+    "build": "node scripts/build-docs.mjs"
   },
   "dependencies": {
-    "@workos-inc/node": "^7.51.0"
+    "@workos-inc/node": "^7.51.0",
+    "marked": "^14.1.4",
+    "yaml": "^2.9.1"
   }
 }
