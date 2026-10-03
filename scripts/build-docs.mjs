@@ -7,7 +7,7 @@
 //   ORG_SRC=~/Orgs/WeDance npm run …   # render a local checkout instead
 
 import { execFileSync } from 'node:child_process'
-import { mkdirSync, rmSync, readFileSync, writeFileSync } from 'node:fs'
+import { cpSync, mkdirSync, rmSync, readFileSync, writeFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join, posix } from 'node:path'
 import { Marked } from 'marked'
@@ -16,7 +16,10 @@ import YAML from 'yaml'
 const REPO = 'razbakov/wedance-org'
 const BRANCH = 'main'
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
-const OUT = join(ROOT, 'docs')
+// Vercel serves public/ (api/ functions stay at the repo root)
+const PUBLIC = join(ROOT, 'public')
+const OUT = join(PUBLIC, 'docs')
+const STATIC = ['index.html', 'roles', 'assets']
 const GH = `https://github.com/${REPO}`
 const RAW = `https://raw.githubusercontent.com/${REPO}/${BRANCH}`
 
@@ -215,7 +218,8 @@ function write(urlPath, html) {
 }
 
 // ---------- emit ----------
-rmSync(OUT, { recursive: true, force: true })
+rmSync(PUBLIC, { recursive: true, force: true })
+for (const f of STATIC) cpSync(join(ROOT, f), join(PUBLIC, f), { recursive: true, filter: src => !src.endsWith('.md') })
 
 for (const f of docs) {
   const { title, html } = render(f, readFileSync(join(SRC, f), 'utf8'))
@@ -272,4 +276,4 @@ function folderPages(n) {
 }
 folderPages(allTree)
 
-console.log(`✓ ${docs.length} documents from ${REPO}@${head[0]} → docs/`)
+console.log(`✓ ${docs.length} documents from ${REPO}@${head[0]} → public/`)

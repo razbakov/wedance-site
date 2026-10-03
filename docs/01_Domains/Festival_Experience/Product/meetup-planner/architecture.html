@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Architecture: WeDance Meetup Planner MVP · WeDance org</title>
+<meta name="description" content="Context WeDance is building &amp;quot;Timeleft for dance festivals&amp;quot; — a social activity platform connecting dancers around festival experiences. The MVP t">
+<meta property="og:title" content="Architecture: WeDance Meetup Planner MVP · WeDance org">
+<meta property="og:description" content="Context WeDance is building &amp;quot;Timeleft for dance festivals&amp;quot; — a social activity platform connecting dancers around festival experiences. The MVP t">
+<meta property="og:url" content="https://org.wedance.vip/docs/01_Domains/Festival_Experience/Product/meetup-planner/architecture">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Caveat:wght@400;700&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/assets/docs.css">
+</head>
+<body data-doc-file="01_Domains/Festival_Experience/Product/meetup-planner/architecture.md">
+<header class="header"><div class="wrap">
+  <a class="logo" href="/"><span class="dot"></span>WeDance</a>
+  <nav class="nav">
+    <a href="/">Overview</a>
+    <a href="/docs/">Documents</a>
+    <a href="/team">Team</a>
+    <a class="app" href="https://2026.wedance.vip">Open the app</a>
+  </nav>
+</div></header>
+<div class="wrap layout">
+  <button class="side-toggle" type="button" onclick="document.body.classList.toggle('side-open')">☰ Documents</button>
+  <nav class="side" aria-label="All documents"><a class="side-home" href="/docs/">All documents <span>114</span></a><ul><li><details><summary><a href="/docs/00_Organization_Logbook/">Organization Logbook</a></summary><ul><li><details><summary><a href="/docs/00_Organization_Logbook/Org_Wide_Policies/">Org Wide Policies</a></summary><ul><li><a href="/docs/00_Organization_Logbook/Org_Wide_Policies/Policy_001_AI_Agent_Boundaries">Policy 001 AI Agent Boundaries</a></li><li><a href="/docs/00_Organization_Logbook/Org_Wide_Policies/Policy_002_Decision_Making">Policy 002 Decision Making</a></li><li><a href="/docs/00_Organization_Logbook/Org_Wide_Policies/Policy_003_Data_and_Privacy">Policy 003 Data And Privacy</a></li><li><a href="/docs/00_Organization_Logbook/Org_Wide_Policies/Policy_004_Collaboration">Policy 004 Collaboration</a></li></ul></details></li><li><details><summary><a href="/docs/00_Organization_Logbook/Organizational_Structure/">Organizational Structure</a></summary><ul><li><a href="/docs/00_Organization_Logbook/Organizational_Structure/Domain_Map">Domain Map</a></li></ul></details></li><li><details><summary><a href="/docs/00_Organization_Logbook/Requirements_Mapping/">Requirements Mapping</a></summary><ul><li><a href="/docs/00_Organization_Logbook/Requirements_Mapping/Requirement_001_Event_Discovery">Requirement 001 Event Discovery</a></li><li><a href="/docs/00_Organization_Logbook/Requirements_Mapping/Requirement_002_Festival_Schedule">Requirement 002 Festival Schedule</a></li><li><a href="/docs/00_Organization_Logbook/Requirements_Mapping/Requirement_003_Social_Coordination">Requirement 003 Social Coordination</a></li><li><a href="/docs/00_Organization_Logbook/Requirements_Mapping/Requirement_004_Class_Promotion">Requirement 004 Class Promotion</a></li><li><a href="/docs/00_Organization_Logbook/Requirements_Mapping/Requirement_005_Artist_Visibility">Requirement 005 Artist Visibility</a></li><li><a href="/docs/00_Organization_Logbook/Requirements_Mapping/Requirement_006_Venue_Bookings">Requirement 006 Venue Bookings</a></li></ul></details></li><li><details><summary><a href="/docs/00_Organization_Logbook/Reviews/">Reviews</a></summary><ul><li><a href="/docs/00_Organization_Logbook/Reviews/2026-04-04_Primary_Driver_Review">2026 04 04 Primary Driver Review</a></li></ul></details></li><li><a href="/docs/00_Organization_Logbook/01_Primary_Driver_and_Requirement">Primary Driver And Requirement</a></li><li><a href="/docs/00_Organization_Logbook/02_Organization_Canvas">Organization Canvas</a></li><li><a href="/docs/00_Organization_Logbook/03_Strategy">Strategy</a></li><li><a href="/docs/00_Organization_Logbook/04_Values">Values</a></li><li><a href="/docs/00_Organization_Logbook/05_Founders_Collaboration_Memo">Founders Collaboration Memo</a></li><li><a href="/docs/00_Organization_Logbook/05_Founders_Memo_Review">Founders Memo Review</a></li></ul></details></li><li><details open><summary><a href="/docs/01_Domains/">Domains</a></summary><ul><li><details><summary><a href="/docs/01_Domains/Discovery/">Discovery</a></summary><ul><li><a href="/docs/01_Domains/Discovery/Domain_Description">Domain Description</a></li></ul></details></li><li><details open><summary><a href="/docs/01_Domains/Festival_Experience/">Festival Experience</a></summary><ul><li><details><summary><a href="/docs/01_Domains/Festival_Experience/Design/">Design</a></summary><ul><li><details><summary><a href="/docs/01_Domains/Festival_Experience/Design/styles/">Styles</a></summary><ul><li><a href="/docs/01_Domains/Festival_Experience/Design/styles/bold-red">Bold Red</a></li><li><a href="/docs/01_Domains/Festival_Experience/Design/styles/clean-studio">Clean Studio</a></li><li><a href="/docs/01_Domains/Festival_Experience/Design/styles/sunset-vibes">Sunset Vibes</a></li></ul></details></li><li><details><summary><a href="/docs/01_Domains/Festival_Experience/Design/ux/">Ux</a></summary><ul><li><a href="/docs/01_Domains/Festival_Experience/Design/ux/festival-schedule">Festival Schedule</a></li></ul></details></li><li><a href="/docs/01_Domains/Festival_Experience/Design/brand">Brand</a></li></ul></details></li><li><details><summary><a href="/docs/01_Domains/Festival_Experience/Governance/">Governance</a></summary><ul><li><details><summary><a href="/docs/01_Domains/Festival_Experience/Governance/Backlog/">Backlog</a></summary><ul><li><a href="/docs/01_Domains/Festival_Experience/Governance/Backlog/001_Define_Agent_Deployment_Plan">Define Agent Deployment Plan</a></li><li><a href="/docs/01_Domains/Festival_Experience/Governance/Backlog/002_Select_Pilot_Festival">Select Pilot Festival</a></li><li><a href="/docs/01_Domains/Festival_Experience/Governance/Backlog/003_Create_Privacy_Policy">Create Privacy Policy</a></li></ul></details></li><li><a href="/docs/01_Domains/Festival_Experience/Governance/Organizer_Pitch_Playbook_v1">Organizer Pitch Playbook V1</a></li></ul></details></li><li><details><summary><a href="/docs/01_Domains/Festival_Experience/Marketing/">Marketing</a></summary><ul><li><details><summary><a href="/docs/01_Domains/Festival_Experience/Marketing/meetup-planner/">Meetup Planner</a></summary><ul><li><details><summary><a href="/docs/01_Domains/Festival_Experience/Marketing/meetup-planner/posters/">Posters</a></summary><ul><li><a href="/docs/01_Domains/Festival_Experience/Marketing/meetup-planner/posters/best-part">Best Part</a></li><li><a href="/docs/01_Domains/Festival_Experience/Marketing/meetup-planner/posters/better-crew">Better Crew</a></li><li><a href="/docs/01_Domains/Festival_Experience/Marketing/meetup-planner/posters/came-for-the-dance">Came For The Dance</a></li><li><a href="/docs/01_Domains/Festival_Experience/Marketing/meetup-planner/posters/dont-just-attend">Dont Just Attend</a></li><li><a href="/docs/01_Domains/Festival_Experience/Marketing/meetup-planner/posters/eating-alone">Eating Alone</a></li><li><a href="/docs/01_Domains/Festival_Experience/Marketing/meetup-planner/posters/guess-which">Guess Which</a></li><li><a href="/docs/01_Domains/Festival_Experience/Marketing/meetup-planner/posters/introduce-you">Introduce You</a></li><li><a href="/docs/01_Domains/Festival_Experience/Marketing/meetup-planner/posters/next-dance-partner">Next Dance Partner</a></li><li><a href="/docs/01_Domains/Festival_Experience/Marketing/meetup-planner/posters/not-a-lottery">Not A Lottery</a></li><li><a href="/docs/01_Domains/Festival_Experience/Marketing/meetup-planner/posters/stay-for-the-dinner">Stay For The Dinner</a></li></ul></details></li><li><a href="/docs/01_Domains/Festival_Experience/Marketing/meetup-planner/campaign">Campaign</a></li><li><a href="/docs/01_Domains/Festival_Experience/Marketing/meetup-planner/content-plan">Content Plan</a></li></ul></details></li></ul></details></li><li><details><summary><a href="/docs/01_Domains/Festival_Experience/Operations/">Operations</a></summary><ul><li><details><summary><a href="/docs/01_Domains/Festival_Experience/Operations/Backlog/">Backlog</a></summary><ul><li><a href="/docs/01_Domains/Festival_Experience/Operations/Backlog/001_Build_Interactive_Schedule_MVP">Build Interactive Schedule MVP</a></li><li><a href="/docs/01_Domains/Festival_Experience/Operations/Backlog/002_Convert_Pilot_Schedule">Convert Pilot Schedule</a></li><li><a href="/docs/01_Domains/Festival_Experience/Operations/Backlog/003_Launch_Distribution">Launch Distribution</a></li><li><a href="/docs/01_Domains/Festival_Experience/Operations/Backlog/004_Set_Up_Analytics">Set Up Analytics</a></li><li><a href="/docs/01_Domains/Festival_Experience/Operations/Backlog/005_View_Festival_Schedule">View Festival Schedule</a></li><li><a href="/docs/01_Domains/Festival_Experience/Operations/Backlog/006_Import_Nuxt_App_Code">Import Nuxt App Code</a></li><li><a href="/docs/01_Domains/Festival_Experience/Operations/Backlog/007_Import_Design_Assets">Import Design Assets</a></li><li><a href="/docs/01_Domains/Festival_Experience/Operations/Backlog/008_Charanga_v0">Charanga V0</a></li></ul></details></li><li><details><summary><a href="/docs/01_Domains/Festival_Experience/Operations/QA/">QA</a></summary><ul><li><a href="/docs/01_Domains/Festival_Experience/Operations/QA/pr-28-dinner-trpc-review">Pr 28 Dinner Trpc Review</a></li></ul></details></li><li><details><summary><a href="/docs/01_Domains/Festival_Experience/Operations/Stories/">Stories</a></summary><ul><li><a href="/docs/01_Domains/Festival_Experience/Operations/Stories/1.1-festival-hero">1.1 Festival Hero</a></li><li><a href="/docs/01_Domains/Festival_Experience/Operations/Stories/1.2-activity-cards">1.2 Activity Cards</a></li><li><a href="/docs/01_Domains/Festival_Experience/Operations/Stories/1.3-social-proof">1.3 Social Proof</a></li><li><a href="/docs/01_Domains/Festival_Experience/Operations/Stories/2.1-sign-up-form">2.1 Sign Up Form</a></li><li><a href="/docs/01_Domains/Festival_Experience/Operations/Stories/2.2-free-spot-counter">2.2 Free Spot Counter</a></li><li><a href="/docs/01_Domains/Festival_Experience/Operations/Stories/2.3-stripe-payment-link">2.3 Stripe Payment Link</a></li><li><a href="/docs/01_Domains/Festival_Experience/Operations/Stories/5.1-dinner-sign-up">5.1 Dinner Sign Up</a></li><li><a href="/docs/01_Domains/Festival_Experience/Operations/Stories/5.2-manual-group-assignment">5.2 Manual Group Assignment</a></li><li><a href="/docs/01_Domains/Festival_Experience/Operations/Stories/5.3-dinner-chat-link">5.3 Dinner Chat Link</a></li><li><a href="/docs/01_Domains/Festival_Experience/Operations/Stories/5.4-restaurant-reveal">5.4 Restaurant Reveal</a></li></ul></details></li><li><a href="/docs/01_Domains/Festival_Experience/Operations/festival-pipeline-2026-Q2">Festival Pipeline 2026 Q2</a></li><li><a href="/docs/01_Domains/Festival_Experience/Operations/sprint-1">Sprint 1</a></li></ul></details></li><li><details open><summary><a href="/docs/01_Domains/Festival_Experience/Product/">Product</a></summary><ul><li><details><summary><a href="/docs/01_Domains/Festival_Experience/Product/festival-schedule/">Festival Schedule</a></summary><ul><li><a href="/docs/01_Domains/Festival_Experience/Product/festival-schedule/strategy">Strategy</a></li><li><a href="/docs/01_Domains/Festival_Experience/Product/festival-schedule/user-journey">User Journey</a></li></ul></details></li><li><details open><summary><a href="/docs/01_Domains/Festival_Experience/Product/meetup-planner/">Meetup Planner</a></summary><ul><li><details><summary><a href="/docs/01_Domains/Festival_Experience/Product/meetup-planner/scenarios/">Scenarios</a></summary><ul><li><a href="/docs/01_Domains/Festival_Experience/Product/meetup-planner/scenarios/dancer-signup">Dancer Signup</a></li><li><a href="/docs/01_Domains/Festival_Experience/Product/meetup-planner/scenarios/dinner-trpc-flow">Dinner Trpc Flow</a></li><li><a href="/docs/01_Domains/Festival_Experience/Product/meetup-planner/scenarios/festival-landing">Festival Landing</a></li><li><a href="/docs/01_Domains/Festival_Experience/Product/meetup-planner/scenarios/find-partners">Find Partners</a></li><li><a href="/docs/01_Domains/Festival_Experience/Product/meetup-planner/scenarios/group-dinner">Group Dinner</a></li><li><a href="/docs/01_Domains/Festival_Experience/Product/meetup-planner/scenarios/post-festival-feedback">Post Festival Feedback</a></li><li><a href="/docs/01_Domains/Festival_Experience/Product/meetup-planner/scenarios/share-ride">Share Ride</a></li><li><a href="/docs/01_Domains/Festival_Experience/Product/meetup-planner/scenarios/share-room">Share Room</a></li></ul></details></li><li><a class="on" href="/docs/01_Domains/Festival_Experience/Product/meetup-planner/architecture">Architecture</a></li><li><a href="/docs/01_Domains/Festival_Experience/Product/meetup-planner/backlog">Backlog</a></li><li><a href="/docs/01_Domains/Festival_Experience/Product/meetup-planner/jtbd">Jtbd</a></li><li><a href="/docs/01_Domains/Festival_Experience/Product/meetup-planner/story-map">Story Map</a></li><li><a href="/docs/01_Domains/Festival_Experience/Product/meetup-planner/strategy">Strategy</a></li><li><a href="/docs/01_Domains/Festival_Experience/Product/meetup-planner/user-journey">User Journey</a></li></ul></details></li></ul></details></li><li><a href="/docs/01_Domains/Festival_Experience/Domain_Description">Domain Description</a></li><li><a href="/docs/01_Domains/Festival_Experience/README">README</a></li></ul></details></li><li><details><summary><a href="/docs/01_Domains/Marketplace/">Marketplace</a></summary><ul><li><a href="/docs/01_Domains/Marketplace/Domain_Description">Domain Description</a></li></ul></details></li></ul></details></li><li><details><summary><a href="/docs/02_Roles/">Roles</a></summary><ul><li><details><summary><a href="/docs/02_Roles/Alex_Razbakov/">Alex Razbakov</a></summary><ul><li><a href="/docs/02_Roles/Alex_Razbakov/Role_Description">Role Description</a></li></ul></details></li><li><details><summary><a href="/docs/02_Roles/Analyst/">Analyst</a></summary><ul><li><a href="/docs/02_Roles/Analyst/Role_Description">Role Description</a></li></ul></details></li><li><details><summary><a href="/docs/02_Roles/Autopilot/">Autopilot</a></summary><ul><li><a href="/docs/02_Roles/Autopilot/Role_Description">Role Description</a></li></ul></details></li><li><details><summary><a href="/docs/02_Roles/Coordinator/">Coordinator</a></summary><ul><li><a href="/docs/02_Roles/Coordinator/Role_Description">Role Description</a></li></ul></details></li><li><details><summary><a href="/docs/02_Roles/Designer/">Designer</a></summary><ul><li><a href="/docs/02_Roles/Designer/Role_Description">Role Description</a></li></ul></details></li><li><details><summary><a href="/docs/02_Roles/Engineer/">Engineer</a></summary><ul><li><a href="/docs/02_Roles/Engineer/Role_Description">Role Description</a></li></ul></details></li><li><details><summary><a href="/docs/02_Roles/Kirill_Korshikov/">Kirill Korshikov</a></summary><ul><li><a href="/docs/02_Roles/Kirill_Korshikov/Role_Description">Role Description</a></li></ul></details></li><li><details><summary><a href="/docs/02_Roles/Marketing_Lead/">Marketing Lead</a></summary><ul><li><a href="/docs/02_Roles/Marketing_Lead/Role_Description">Role Description</a></li></ul></details></li><li><details><summary><a href="/docs/02_Roles/Operations_Manager/">Operations Manager</a></summary><ul><li><a href="/docs/02_Roles/Operations_Manager/Role_Description">Role Description</a></li></ul></details></li><li><details><summary><a href="/docs/02_Roles/Partnership_Manager/">Partnership Manager</a></summary><ul><li><a href="/docs/02_Roles/Partnership_Manager/Role_Description">Role Description</a></li></ul></details></li><li><details><summary><a href="/docs/02_Roles/Product_Lead/">Product Lead</a></summary><ul><li><a href="/docs/02_Roles/Product_Lead/Role_Description">Role Description</a></li></ul></details></li></ul></details></li><li><details><summary><a href="/docs/03_Coordination/">Coordination</a></summary><ul><li><details><summary><a href="/docs/03_Coordination/Dispatch_Plans/">Dispatch Plans</a></summary><ul><li><a href="/docs/03_Coordination/Dispatch_Plans/2026-04-04_Import_From_Festival_Schedule">2026 04 04 Import From Festival Schedule</a></li></ul></details></li><li><details><summary><a href="/docs/03_Coordination/Meeting_Records/">Meeting Records</a></summary><ul><li><a href="/docs/03_Coordination/Meeting_Records/2026-04-04_Driver_Workshop_Raw_Transcriptions">2026 04 04 Driver Workshop Raw Transcriptions</a></li><li><a href="/docs/03_Coordination/Meeting_Records/2026-04-04_Founder_Sync_Agenda">2026 04 04 Founder Sync Agenda</a></li></ul></details></li><li><a href="/docs/03_Coordination/2026-07-04-new-user-personas-onboarding">2026 07 04 New User Personas Onboarding</a></li><li><a href="/docs/03_Coordination/2026-07-07-unified-profiles-booking-plan">2026 07 07 Unified Profiles Booking Plan</a></li><li><a href="/docs/03_Coordination/2026-07-19-festival-organizer-proposal">2026 07 19 Festival Organizer Proposal</a></li><li><a href="/docs/03_Coordination/2026-07-19-organizer-email-SEND-READY">2026 07 19 Organizer Email SEND READY</a></li><li><a href="/docs/03_Coordination/Review_and_Retrospective_Schedule">Review And Retrospective Schedule</a></li><li><a href="/docs/03_Coordination/Work_Board">Work Board</a></li></ul></details></li><li><details><summary><a href="/docs/ops/">Operations log</a></summary><ul><li><details><summary><a href="/docs/ops/sessions/">Sessions</a></summary><ul><li><a href="/docs/ops/sessions/2026-07-17-leandro-onboarding">2026 07 17 Leandro Onboarding</a></li><li><a href="/docs/ops/sessions/2026-08-07-wedance-kickoff-vitali">2026 08 07 Wedance Kickoff Vitali</a></li><li><a href="/docs/ops/sessions/2026-09-30-wedance-dev-daily">2026 09 30 Wedance Dev Daily</a></li></ul></details></li></ul></details></li><li><details><summary><a href="/docs/claude/">AI agents &amp; skills</a></summary><ul><li><details><summary><a href="/docs/claude/agents/">Agents</a></summary><ul><li><a href="/docs/claude/agents/analyst">Analyst</a></li><li><a href="/docs/claude/agents/autopilot">Autopilot</a></li><li><a href="/docs/claude/agents/coordinator">Coordinator</a></li><li><a href="/docs/claude/agents/designer">Designer</a></li><li><a href="/docs/claude/agents/engineer">Engineer</a></li><li><a href="/docs/claude/agents/marketing-lead">Marketing Lead</a></li><li><a href="/docs/claude/agents/operations-manager">Operations Manager</a></li><li><a href="/docs/claude/agents/partnership-manager">Partnership Manager</a></li><li><a href="/docs/claude/agents/product-lead">Product Lead</a></li></ul></details></li><li><details><summary><a href="/docs/claude/skills/">Skills</a></summary><ul><li><details><summary><a href="/docs/claude/skills/hi/">Hi</a></summary><ul><li><a href="/docs/claude/skills/hi/SKILL">SKILL</a></li></ul></details></li></ul></details></li></ul></details></li><li><a href="/docs/CLAUDE">AI operating instructions</a></li></ul></nav>
+  <main class="main">
+    <div class="crumbs"><a href="/docs/">Documents</a><i>/</i><a href="/docs/01_Domains/">Domains</a><i>/</i><a href="/docs/01_Domains/Festival_Experience/">Festival Experience</a><i>/</i><a href="/docs/01_Domains/Festival_Experience/Product/">Product</a><i>/</i><a href="/docs/01_Domains/Festival_Experience/Product/meetup-planner/">Meetup Planner</a><i>/</i><span>Architecture: WeDance Meetup Planner MVP</span></div>
+    <article class="doc">
+    <h1 class="title" data-c>Architecture: WeDance Meetup Planner MVP</h1>
+    <div class="docmeta">
+    <span class="path">01_Domains/Festival_Experience/Product/meetup-planner/architecture.md</span>
+    <span>Last changed <a href="https://github.com/razbakov/wedance-org/commit/a9cebef">7 Apr 2026</a> — Initial commit: WeDance S3 governance structure</span>
+    <span class="actions">
+      <a href="https://github.com/razbakov/wedance-org/edit/main/01_Domains/Festival_Experience/Product/meetup-planner/architecture.md">Propose a change</a>
+      <a href="https://github.com/razbakov/wedance-org/commits/main/01_Domains/Festival_Experience/Product/meetup-planner/architecture.md">History</a>
+      <a href="https://github.com/razbakov/wedance-org/blob/main/01_Domains/Festival_Experience/Product/meetup-planner/architecture.md">Source</a>
+    </span>
+  </div>
+    <p class="chint">💬 Hover any passage to comment. Comments become triage issues, and accepted changes land as PRs to this file.</p>
+    <div class="doc-body">
+<h2>Context</h2>
+<p>WeDance is building &quot;Timeleft for dance festivals&quot; — a social activity platform connecting dancers around festival experiences. The MVP targets <strong>one pilot festival</strong> with manual matching, no automated algorithms, and WhatsApp/Telegram for communication. The goal is hypothesis validation: will 10+ dancers sign up and 50%+ attend activities?</p>
+<p>The existing Nuxt 4 app is 100% client-side with mock data. This architecture adds a thin backend layer within the Nuxt ecosystem to support real sign-ups, activities, freemium paywall, and organizer matching tools.</p>
+<hr>
+<h2>1. System Architecture</h2>
+<pre><code>┌──────────────────────────────────────────────────────────┐
+│                     Vercel (SSR)                          │
+│                                                          │
+│  ┌──────────────┐    ┌──────────────┐    ┌────────────┐  │
+│  │  Nuxt SSR    │───▶│  tRPC Router │───▶│   Neon     │  │
+│  │  (Vue 3)     │    │  (trpc-nuxt) │    │ (Postgres) │  │
+│  │  app/        │    │  server/trpc/ │    └────────────┘  │
+│  └──────┬───────┘    └──────┬───────┘                    │
+│         │                   │                            │
+│  ┌──────┴───────┐    ┌──────┴───────┐                    │
+│  │ tRPC Client  │    │ Drizzle ORM  │                    │
+│  │ useClient()  │    │ (type-safe)  │                    │
+│  └──────────────┘    └──────────────┘                    │
+│                                                          │
+│  External: Stripe (€1) · Resend (email) · Google OAuth   │
+└──────────────────────────────────────────────────────────┘
+</code></pre>
+<p><strong>Key decisions:</strong></p>
+<ul>
+<li><strong>Neon (Postgres)</strong> — serverless PostgreSQL, free tier (0.5GB, 190K compute hours/mo), industry standard, no migration needed later</li>
+<li><strong>Drizzle ORM</strong> — type-safe SQL mapping directly from existing TypeScript interfaces, excellent Postgres support</li>
+<li><strong>tRPC via <code>trpc-nuxt</code></strong> — end-to-end type safety between server and client; procedures replace REST routes; input/output types are shared automatically</li>
+<li><strong>SSR mode</strong> — switch from static generation to SSR for runtime server routes</li>
+<li><strong>Continue composables pattern</strong> — no Pinia; new composables wrap tRPC client calls</li>
+</ul>
+<hr>
+<h2>2. Database Schema</h2>
+<p>Maps from existing types in <code>app/types/festival.ts</code>. Core tables:</p>
+<table>
+<thead>
+<tr>
+<th>Table</th>
+<th>Purpose</th>
+<th>Key columns</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>dancers</code></td>
+<td>User identity</td>
+<td>id, email, name, photo, city, bio, role, google_id</td>
+</tr>
+<tr>
+<td><code>dancer_styles</code></td>
+<td>Dance styles + levels</td>
+<td>dancer_id, style_name, level</td>
+</tr>
+<tr>
+<td><code>festivals</code></td>
+<td>Festival data (seeded)</td>
+<td>slug, name, dates, venue, social_links (JSON)</td>
+</tr>
+<tr>
+<td><code>festival_signups</code></td>
+<td>Dancer ↔ Festival join</td>
+<td>festival_id, dancer_id, is_free_spot, paid, stripe_payment_id</td>
+</tr>
+<tr>
+<td><code>rides</code></td>
+<td>Ride offers/requests</td>
+<td>festival_id, dancer_id, type (offering/looking), origin_city, date, seats</td>
+</tr>
+<tr>
+<td><code>ride_groups</code> + <code>ride_group_members</code></td>
+<td>Manual ride matching</td>
+<td>chat_link, member ride IDs</td>
+</tr>
+<tr>
+<td><code>room_searches</code></td>
+<td>Roommate toggle</td>
+<td>festival_id, dancer_id, active flag</td>
+</tr>
+<tr>
+<td><code>room_groups</code> + <code>room_group_members</code></td>
+<td>Manual room matching</td>
+<td>chat_link, member dancer IDs</td>
+</tr>
+<tr>
+<td><code>dinners</code></td>
+<td>Group dinner slots</td>
+<td>festival_id, day, time_slot, restaurant, max_size, reveal_date</td>
+</tr>
+<tr>
+<td><code>dinner_signups</code></td>
+<td>Dinner RSVP</td>
+<td>dinner_id, dancer_id</td>
+</tr>
+<tr>
+<td><code>dinner_groups</code> + <code>dinner_group_members</code></td>
+<td>Manual dinner grouping</td>
+<td>chat_link, member dancer IDs</td>
+</tr>
+<tr>
+<td><code>dancer_likes</code></td>
+<td>Swipe right</td>
+<td>festival_id, from_dancer, to_dancer</td>
+</tr>
+<tr>
+<td><code>dance_feedback</code></td>
+<td>Post-dance rating/text</td>
+<td>from_dancer, to_dancer, danced, rating, feedback_text</td>
+</tr>
+<tr>
+<td><code>endorsements</code></td>
+<td>Style endorsements</td>
+<td>from_dancer, to_dancer, style_name</td>
+</tr>
+<tr>
+<td><code>extra_activities</code> + <code>activity_signups</code></td>
+<td>Community activities</td>
+<td>title, date, time, max_participants</td>
+</tr>
+</tbody></table>
+<p>IDs are UUIDs (<code>uuid</code> type in Postgres, generated via <code>gen_random_uuid()</code>). Mutual matches = bidirectional rows in <code>dancer_likes</code>. Mutual reveal = both rows exist in <code>dance_feedback</code>/<code>endorsements</code>.</p>
+<hr>
+<h2>3. tRPC Router Structure</h2>
+<p>All procedures live in <code>server/trpc/routers/</code>. The tRPC integration uses <code>trpc-nuxt</code> which mounts the router at <code>/api/trpc</code>. Stripe webhook remains a plain Nuxt server route (needs raw body access).</p>
+<pre><code>server/trpc/
+  routers/
+    auth.ts                   # login, verify, me, logout
+    festival.ts               # getBySlug (festival + aggregated counts)
+    signup.ts                 # create (freemium gate), freemium status
+    ride.ts                   # list, create
+    room.ts                   # list, toggle
+    dinner.ts                 # list, join, leave
+    like.ts                   # create, remove
+    match.ts                  # list (mutual matches)
+    feedback.ts               # submit, get
+    endorsement.ts            # create, get
+    activity.ts               # list, join
+    admin.ts                  # signups, rideGroups, roomGroups, dinnerGroups, reveal
+  context.ts                  # Creates context (db, session) for each request
+  trpc.ts                     # tRPC instance, middleware (auth, admin)
+  index.ts                    # appRouter = mergeRouters(...)
+
+server/api/
+  trpc/[trpc].ts              # trpc-nuxt handler (mounts appRouter)
+  webhooks/stripe.post.ts     # Plain route — Stripe needs raw body
+</code></pre>
+<p><strong>Example procedure</strong> (<code>server/trpc/routers/ride.ts</code>):</p>
+<pre><code class="language-ts">export const rideRouter = router({
+  list: protectedProcedure
+    .input(z.object({ festivalSlug: z.string() }))
+    .query(({ ctx, input }) =&gt; { /* Drizzle query */ }),
+  create: protectedProcedure
+    .input(z.object({
+      festivalSlug: z.string(),
+      type: z.enum([&#39;offering&#39;, &#39;looking&#39;]),
+      originCity: z.string(),
+      date: z.string(),
+      seatsAvailable: z.number().optional(),
+    }))
+    .mutation(({ ctx, input }) =&gt; { /* Drizzle insert */ }),
+})
+</code></pre>
+<p><strong>Client usage</strong> (in composables):</p>
+<pre><code class="language-ts">const { $client } = useNuxtApp()
+const { data: rides } = $client.ride.list.useQuery({ festivalSlug })
+await $client.ride.create.mutate({ festivalSlug, type: &#39;offering&#39;, ... })
+</code></pre>
+<hr>
+<h2>4. Authentication</h2>
+<p><strong>Minimal: email verification code + optional Google OAuth.</strong></p>
+<ul>
+<li><strong>Primary</strong>: Dancer enters name + email → server sends 6-digit code via Resend → dancer enters code → <code>h3</code> session cookie set</li>
+<li><strong>Secondary</strong>: &quot;Continue with Google&quot; via <code>nuxt-auth-utils</code> module</li>
+<li><strong>Session</strong>: httpOnly signed cookie with <code>{ dancerId, email, isAdmin }</code></li>
+<li><strong>Admin</strong>: hardcoded email list in env var <code>ADMIN_EMAILS</code></li>
+<li><strong>No passwords, no JWT, no refresh tokens</strong> — MVP simplicity</li>
+</ul>
+<hr>
+<h2>5. Client-Side Data Flow</h2>
+<p>New composables (alongside unchanged <code>useCart</code>, <code>useWeekPlan</code>, <code>useYearPlan</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Composable</th>
+<th>Wraps (tRPC procedures)</th>
+<th>Components</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>useAuth()</code></td>
+<td><code>auth.*</code></td>
+<td>SignUpModal, layout</td>
+</tr>
+<tr>
+<td><code>useFestivalData(slug)</code></td>
+<td><code>festival.getBySlug</code>, <code>ride.list</code>, <code>dinner.list</code>, <code>room.list</code></td>
+<td>ActivitiesTab, CartDrawer</td>
+</tr>
+<tr>
+<td><code>useSwipeDeck(slug)</code></td>
+<td><code>like.create/remove</code>, <code>match.list</code></td>
+<td>DiscoverDancers</td>
+</tr>
+<tr>
+<td><code>useDanceList(slug)</code></td>
+<td><code>feedback.*</code>, <code>endorsement.*</code></td>
+<td>DiscoverDancers (post-dance)</td>
+</tr>
+<tr>
+<td><code>useFreemium(slug)</code></td>
+<td><code>signup.freemiumStatus</code></td>
+<td>PaywallModal</td>
+</tr>
+</tbody></table>
+<p>Pattern: <code>$client.router.procedure.useQuery()</code> for reads, <code>$client.router.procedure.mutate()</code> for mutations with optimistic updates. Types flow end-to-end from Drizzle schema → tRPC router → client — no manual type duplication.</p>
+<p>Workshop schedule and year plan stay as client-side mock data — they&#39;re read-only and not in MVP scope for backend persistence.</p>
+<hr>
+<h2>6. Freemium / Payment Flow</h2>
+<pre><code>Action (join dinner, post ride, etc.)
+  → Signed in? No → SignUpModal
+  → Yes → Free spots &lt; 10? → Claim free spot
+  → Free spots &gt;= 10? → PaywallModal → Stripe Checkout → webhook confirms → activity unlocked
+</code></pre>
+<ul>
+<li><strong>Stripe Checkout Session</strong> (hosted page, no PCI burden)</li>
+<li>Or simpler: <strong>Stripe Payment Link</strong> (zero code, organizer creates in dashboard)</li>
+<li>Webhook at <code>/api/webhooks/stripe</code> marks <code>festival_signups.paid = 1</code></li>
+<li>Counter via tRPC: <code>signup.freemiumStatus</code> → <code>{ freeSpotsTaken, maxFreeSpots, userUnlocked }</code></li>
+</ul>
+<hr>
+<h2>7. Admin / Organizer Tools</h2>
+<p>Single page at <code>/admin/festivals/[slug]</code> (protected by admin middleware):</p>
+<ol>
+<li><strong>Signups table</strong> — all dancers with name, email, city, styles, role, free/paid status</li>
+<li><strong>Ride matching</strong> — list offering/looking, filter by city, checkbox-select → &quot;Group selected&quot; → enter WhatsApp link</li>
+<li><strong>Room matching</strong> — list dancers with toggle on, same group UI</li>
+<li><strong>Dinner grouping</strong> — per time slot, show signups, &quot;Auto-suggest&quot; (round-robin 4-6), adjust, finalize with chat links</li>
+<li><strong>Restaurant reveal</strong> — button to make restaurant visible to group</li>
+</ol>
+<p>No drag-and-drop. Checkbox + button is sufficient for the pilot (organizer = WeDance team).</p>
+<hr>
+<h2>8. New Dependencies</h2>
+<pre><code>drizzle-orm @neondatabase/serverless  # Database (Drizzle + Neon serverless driver)
+drizzle-kit                           # Migrations (dev)
+trpc-nuxt @trpc/server @trpc/client zod  # tRPC end-to-end type safety
+nuxt-auth-utils                       # Google OAuth + session
+@stripe/stripe-node                   # Payment
+resend                                # Email (login codes)
+</code></pre>
+<hr>
+<h2>9. Migration Path (Incremental)</h2>
+<p>Feature flag in <code>nuxt.config.ts</code> → <code>runtimeConfig.public.useRealBackend: false</code> lets each feature toggle independently.</p>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>What</th>
+<th>UI changes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>1</strong></td>
+<td>Server infra: Drizzle schema, Neon connection, tRPC router, migrations, seed festival data</td>
+<td>None</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td>Auth: <code>useAuth()</code>, real SignUpModal, session</td>
+<td>Replace <code>isSignedIn = ref(false)</code></td>
+</tr>
+<tr>
+<td><strong>3a</strong></td>
+<td>Freemium: signup + free spot counter</td>
+<td>PaywallModal wired to Stripe</td>
+</tr>
+<tr>
+<td><strong>3b</strong></td>
+<td>Rides: tRPC procedures + composable</td>
+<td>ActivitiesTab, CartDrawer use real data</td>
+</tr>
+<tr>
+<td><strong>3c</strong></td>
+<td>Rooms: tRPC procedures + composable</td>
+<td>CartDrawer uses real data</td>
+</tr>
+<tr>
+<td><strong>3d</strong></td>
+<td>Dinners: tRPC procedures + composable</td>
+<td>Swipe deck + CartDrawer use real data</td>
+</tr>
+<tr>
+<td><strong>3e</strong></td>
+<td>Partners: likes + matches</td>
+<td>DiscoverDancers uses real data</td>
+</tr>
+<tr>
+<td><strong>3f</strong></td>
+<td>Feedback: ratings + endorsements</td>
+<td>Dance list uses real data</td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td>Admin page</td>
+<td>New page, no existing component changes</td>
+</tr>
+<tr>
+<td><strong>5</strong></td>
+<td>Stripe webhook</td>
+<td>PaywallModal → real payment</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>10. File Structure (New Files)</h2>
+<pre><code>engineering/nuxt-app/
+  server/
+    database/
+      schema.ts                    # Drizzle table definitions (Postgres)
+      migrations/                  # Generated SQL
+    trpc/
+      trpc.ts                      # tRPC instance + middleware
+      context.ts                   # Request context (db, session)
+      index.ts                     # Merged appRouter
+      routers/
+        auth.ts                    # login, verify, me, logout
+        festival.ts                # getBySlug
+        signup.ts                  # create, freemiumStatus
+        ride.ts                    # list, create
+        room.ts                    # list, toggle
+        dinner.ts                  # list, join, leave
+        like.ts                    # create, remove
+        match.ts                   # list
+        feedback.ts                # submit, get
+        endorsement.ts             # create, get
+        activity.ts                # list, join
+        admin.ts                   # signups, groups, reveal
+    api/
+      trpc/[trpc].ts              # trpc-nuxt handler
+      webhooks/stripe.post.ts     # Plain route (raw body)
+    middleware/auth.ts
+    utils/db.ts, session.ts, stripe.ts
+  app/
+    composables/
+      useAuth.ts                   # NEW
+      useFestivalData.ts           # NEW
+      useSwipeDeck.ts              # NEW
+      useDanceList.ts              # NEW
+      useFreemium.ts               # NEW
+    pages/admin/festivals/[slug].vue  # NEW
+    components/PaywallModal.vue       # NEW
+    plugins/trpc.ts                # NEW — tRPC client plugin
+  drizzle.config.ts
+</code></pre>
+<hr>
+<h2>11. Verification</h2>
+<ol>
+<li><strong>Auth</strong>: Sign up with email → receive code → enter code → session persists across refresh</li>
+<li><strong>Freemium</strong>: Sign up 10 dancers → 11th sees paywall → pay €1 → unlocked</li>
+<li><strong>Activities</strong>: Post a ride → visible to other dancers → organizer groups in admin → WhatsApp link appears</li>
+<li><strong>Swipe</strong>: Like dancer → they like back → appears in My Dance List → mark danced → endorse → mutual reveal</li>
+<li><strong>BDD tests</strong>: All 7 feature files pass against real backend (toggle feature flag per test suite)</li>
+<li><strong>Admin</strong>: Organizer sees all signups, creates groups, reveals restaurants</li>
+</ol>
+</div>
+  </article>
+  </main>
+</div>
+<footer class="footer"><div class="wrap">
+  <p>Mirrored from <a href="https://github.com/razbakov/wedance-org">razbakov/wedance-org</a> @ <a href="https://github.com/razbakov/wedance-org/commit/e1f22ae">e1f22ae</a> · 30 Sept 2026. The repo is the source of truth — governance changes land there as pull requests.</p>
+</div></footer>
+<script src="/assets/living-comments.js" defer></script>
+</body>
+</html>
