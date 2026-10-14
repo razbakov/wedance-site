@@ -36,8 +36,12 @@ function source() {
   if (process.env.ORG_SRC) return process.env.ORG_SRC.replace(/^~/, process.env.HOME)
   const dir = join(ROOT, '.org-src')
   rmSync(dir, { recursive: true, force: true })
+  // The governance repo is private: on Vercel, ORG_REPO_TOKEN (read-only
+  // Contents on razbakov/wedance-org) authenticates the clone.
+  const token = process.env.ORG_REPO_TOKEN
+  const url = token ? `https://x-access-token:${token}@github.com/${REPO}.git` : `${GH}.git`
   // blob:none keeps full history (for "last changed") without old blobs
-  execFileSync('git', ['clone', '--quiet', '--filter=blob:none', '--branch', BRANCH, `${GH}.git`, dir], { stdio: 'inherit' })
+  execFileSync('git', ['clone', '--quiet', '--filter=blob:none', '--branch', BRANCH, url, dir], { stdio: 'inherit' })
   return dir
 }
 const SRC = source()
