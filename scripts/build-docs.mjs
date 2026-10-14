@@ -16,9 +16,11 @@ import YAML from 'yaml'
 const REPO = 'razbakov/wedance-org'
 const BRANCH = 'main'
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
-// Vercel serves public/ (api/ functions stay at the repo root)
+// Vercel serves public/ (api/ functions stay at the repo root). Documents are
+// team-only, so they go to private/docs — never served statically — and
+// api/docs.js hands them out behind the WorkOS session (vercel.json includeFiles).
 const PUBLIC = join(ROOT, 'public')
-const OUT = join(PUBLIC, 'docs')
+const OUT = join(ROOT, 'private', 'docs')
 const STATIC = ['index.html', 'roles', 'assets']
 const GH = `https://github.com/${REPO}`
 const RAW = `https://raw.githubusercontent.com/${REPO}/${BRANCH}`
@@ -166,6 +168,7 @@ function shell({ title, desc, path, active, crumbs, main, file }) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
 <title>${esc(title)} · WeDance org</title>
 <meta name="description" content="${esc(desc)}">
 <meta property="og:title" content="${esc(title)} · WeDance org">
@@ -219,6 +222,7 @@ function write(urlPath, html) {
 
 // ---------- emit ----------
 rmSync(PUBLIC, { recursive: true, force: true })
+rmSync(OUT, { recursive: true, force: true })
 for (const f of STATIC) cpSync(join(ROOT, f), join(PUBLIC, f), { recursive: true, filter: src => !src.endsWith('.md') })
 
 for (const f of docs) {
@@ -276,4 +280,4 @@ function folderPages(n) {
 }
 folderPages(allTree)
 
-console.log(`✓ ${docs.length} documents from ${REPO}@${head[0]} → public/`)
+console.log(`✓ ${docs.length} documents from ${REPO}@${head[0]} → private/docs/`)
