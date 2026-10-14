@@ -3,6 +3,14 @@
   "cleanUrls": true,
   "rewrites": [
     {
+      "source": "/docs",
+      "destination": "/api/docs"
+    },
+    {
+      "source": "/docs/:p*",
+      "destination": "/api/docs?p=:p*"
+    },
+    {
       "source": "/team",
       "destination": "/api/team"
     },
@@ -10,5 +18,10 @@
       "source": "/team/product-steward",
       "destination": "/api/team-product-steward"
     }
-  ]
+  ],
+  "functions": {
+    "api/docs.js": {
+      "includeFiles": "private/docs/**"
+    }
+  }
 }

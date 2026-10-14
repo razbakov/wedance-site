@@ -1,6 +1,6 @@
 // AuthKit redirects here with ?code. Exchange it, seal the session into a cookie,
-// then send the user to /team. Enforces the optional team allowlist.
-import { workos, CLIENT_ID, COOKIE_PASSWORD, setSessionCookie, isAllowed } from '../../lib/workos.js';
+// then send the user back to where they started (state) or /team. Enforces the optional team allowlist.
+import { workos, CLIENT_ID, COOKIE_PASSWORD, setSessionCookie, isAllowed, safeReturnTo } from '../../lib/workos.js';
 
 function deniedPage(user) {
   const email = (user && user.email) || 'your account';
@@ -17,8 +17,9 @@ a{color:#dc2626;font-weight:700}</style>
 }
 
 export default async function handler(req, res) {
-  const code = (req.query && req.query.code)
-    || new URL(req.url, `https://${req.headers.host}`).searchParams.get('code');
+  const params = new URL(req.url, `https://${req.headers.host}`).searchParams;
+  const code = (req.query && req.query.code) || params.get('code');
+  const returnTo = safeReturnTo((req.query && req.query.state) || params.get('state')) || '/team';
   if (!code) { res.writeHead(302, { Location: '/api/auth/login' }); return res.end(); }
   try {
     const { user, sealedSession } = await workos.userManagement.authenticateWithCode({
@@ -32,7 +33,7 @@ export default async function handler(req, res) {
       return;
     }
     setSessionCookie(res, sealedSession);
-    res.writeHead(302, { Location: '/team' });
+    res.writeHead(302, { Location: returnTo });
     res.end();
   } catch (e) {
     res.writeHead(302, { Location: '/?auth_error=' + encodeURIComponent(e.message || 'failed') });
