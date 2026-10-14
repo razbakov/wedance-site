@@ -3,7 +3,7 @@
 // statically); this hands them out only to a signed-in, allowlisted session.
 import { readFile } from 'node:fs/promises';
 import { join, normalize, sep } from 'node:path';
-import { getSession, configured } from '../lib/workos.js';
+import { getSession, configured, isAllowed } from '../lib/workos.js';
 
 const BASE = join(process.cwd(), 'private', 'docs');
 
@@ -36,6 +36,12 @@ export default async function handler(req, res) {
     const back = '/docs/' + path.split('/').map(encodeURIComponent).join('/');
     res.writeHead(302, { Location: '/api/auth/login?returnTo=' + encodeURIComponent(back) });
     return res.end();
+  }
+  // The allowlist is checked at login; re-check so removing someone takes effect
+  // even while their session cookie is still valid.
+  if (!isAllowed(session.user)) {
+    res.status(403).send('Not on the team allowlist. <a href="/api/auth/logout">Sign out</a>');
+    return;
   }
 
   const html = await load(path);

@@ -32,20 +32,25 @@ const DOC_EXT = /\.(md|feature|ya?ml)$/i
 const EXCLUDE = [/^contacts\//, /^\.gitignore$/, /^\.claude\/(settings[^/]*|launch)\.json$/]
 
 // ---------- source ----------
+// The governance repo is private: on Vercel, ORG_REPO_TOKEN authenticates git.
+// Passed as an env-only header so it never lands in .git/config or argv.
+const token = process.env.ORG_REPO_TOKEN
+const GIT_ENV = token ? {
+  ...process.env,
+  GIT_CONFIG_COUNT: '1',
+  GIT_CONFIG_KEY_0: 'http.https://github.com/.extraHeader',
+  GIT_CONFIG_VALUE_0: 'Authorization: Basic ' + Buffer.from(`x-access-token:${token}`).toString('base64'),
+} : process.env
 function source() {
   if (process.env.ORG_SRC) return process.env.ORG_SRC.replace(/^~/, process.env.HOME)
   const dir = join(ROOT, '.org-src')
   rmSync(dir, { recursive: true, force: true })
-  // The governance repo is private: on Vercel, ORG_REPO_TOKEN (read-only
-  // Contents on razbakov/wedance-org) authenticates the clone.
-  const token = process.env.ORG_REPO_TOKEN
-  const url = token ? `https://x-access-token:${token}@github.com/${REPO}.git` : `${GH}.git`
   // blob:none keeps full history (for "last changed") without old blobs
-  execFileSync('git', ['clone', '--quiet', '--filter=blob:none', '--branch', BRANCH, url, dir], { stdio: 'inherit' })
+  execFileSync('git', ['clone', '--quiet', '--filter=blob:none', '--branch', BRANCH, `${GH}.git`, dir], { stdio: 'inherit', env: GIT_ENV })
   return dir
 }
 const SRC = source()
-const git = (...a) => execFileSync('git', ['-C', SRC, ...a], { encoding: 'utf8', maxBuffer: 64 << 20 })
+const git = (...a) => execFileSync('git', ['-C', SRC, ...a], { encoding: 'utf8', maxBuffer: 64 << 20, env: GIT_ENV })
 
 const files = git('ls-files').split('\n').filter(Boolean).filter(f => !EXCLUDE.some(rx => rx.test(f)))
 const head = git('log', '-1', '--format=%h|%cI').trim().split('|')
