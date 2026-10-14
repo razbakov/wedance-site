@@ -7,6 +7,14 @@
       "destination": "/api/docs"
     },
     {
+      "source": "/docs/",
+      "destination": "/api/docs"
+    },
+    {
+      "source": "/docs/:p*/",
+      "destination": "/api/docs?p=:p*"
+    },
+    {
       "source": "/docs/:p*",
       "destination": "/api/docs?p=:p*"
     },
