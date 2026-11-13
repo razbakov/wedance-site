@@ -4,8 +4,10 @@ WeDance runs in the open with Sociocracy 3.0. We don't post job ads — we open 
 Each circle owns a domain, is driven by a real need, and is scaffolded day-to-day by AI agents.
 An **open role** means a human can take one over or work alongside the agent.
 
-This directory is the **single source of truth** for what's open. The "Open circles" section on
-[org.wedance.vip](https://org.wedance.vip/#circles) renders from these files — edit here, not the HTML.
+> **Moved (2026-11-13):** the public org page now lives at
+> [2026.wedance.vip/docs/organization](https://2026.wedance.vip/docs/organization)
+> (`app/pages/docs/organization.vue` in razbakov/wedance-2026). org.wedance.vip `/` and `/roles/*`
+> redirect there; these files are kept for history and are no longer published.
 
 ## How joining works
 

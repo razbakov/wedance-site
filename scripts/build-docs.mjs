@@ -190,9 +190,9 @@ function shell({ title, desc, path, active, crumbs, main, file }) {
 </head>
 <body${file ? ` data-doc-file="${esc(file)}"` : ''}>
 <header class="header"><div class="wrap">
-  <a class="logo" href="/"><span class="dot"></span>WeDance</a>
+  <a class="logo" href="https://2026.wedance.vip/docs/organization"><span class="dot"></span>WeDance</a>
   <nav class="nav">
-    <a href="/">Overview</a>
+    <a href="https://2026.wedance.vip/docs/organization">How we’re organised</a>
     <a href="/docs/">Documents</a>
     <a href="/team">Team</a>
     <a class="app" href="https://2026.wedance.vip">Open the app</a>

@@ -244,7 +244,7 @@ td strong,th strong{color:var(--ink)}
 </div></section>
 
 <footer class="footer"><div class="container">
-  Team room · noindex · governed by Sociocracy 3.0 · <a href="/team">← Team room</a> · <a href="/">public doc</a>
+  Team room · noindex · governed by Sociocracy 3.0 · <a href="/team">← Team room</a> · <a href="https://2026.wedance.vip/docs/organization">public doc</a>
 </div></footer>
 </body></html>`;
 }

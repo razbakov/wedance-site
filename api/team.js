@@ -83,7 +83,7 @@ a{color:var(--red);text-decoration:none}a:hover{color:#b91c1c}
     <a class="card link-card" href="https://github.com/razbakov/wedance-2026" target="_blank" rel="noopener"><h3>GitHub →</h3><p>The 2026 app + the story files (docs/issues). Open issues, open PRs.</p></a>
     <a class="card link-card" href="https://2026.wedance.vip" target="_blank" rel="noopener"><h3>The app →</h3><p>2026.wedance.vip — real migrated data, live.</p></a>
     <a class="card link-card" href="https://github.com/razbakov/wedance-2026/blob/main/docs/issues" target="_blank" rel="noopener"><h3>Story files →</h3><p>Per-promise user stories with CUJ / JTBD / status / WSJF.</p></a>
-    <a class="card link-card" href="/"><h3>Public doc →</h3><p>The outward-facing living doc at org.wedance.vip.</p></a>
+    <a class="card link-card" href="https://2026.wedance.vip/docs/organization"><h3>Public doc →</h3><p>How we're organised, on the WeDance docs.</p></a>
   </div>
 </div></section>
 
@@ -121,7 +121,7 @@ a{color:var(--red);text-decoration:none}a:hover{color:#b91c1c}
 </div></section>
 
 <footer class="footer"><div class="container">
-  Team room · noindex · governed by Sociocracy 3.0 · <a href="/">public doc</a>
+  Team room · noindex · governed by Sociocracy 3.0 · <a href="https://2026.wedance.vip/docs/organization">public doc</a>
 </div></footer>
 </body></html>`;
 }
@@ -134,7 +134,7 @@ export default async function handler(req, res) {
 <style>body{font-family:Inter,system-ui,sans-serif;background:#fbf5ea;color:#3b1f0d;display:grid;place-items:center;min-height:100vh;margin:0;text-align:center}.b{max-width:420px;padding:2rem}h1{font-family:'Playfair Display',Georgia,serif}a{color:#dc2626;font-weight:700}</style>
 <div class=b><div style="font-size:2.4rem">🔧</div><h1>Team room is being wired up</h1>
 <p>Google SSO isn't connected yet. Check back shortly.</p>
-<p style="margin-top:1.25rem"><a href="/">← Public doc</a></p></div>`);
+<p style="margin-top:1.25rem"><a href="https://2026.wedance.vip/docs/organization">← Public doc</a></p></div>`);
     return;
   }
   const session = await getSession(req, res);
