@@ -1,6 +1,28 @@
 {
   "buildCommand": "npm run build",
   "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "https://2026.wedance.vip/docs/organization",
+      "permanent": true
+    },
+    {
+      "source": "/index.html",
+      "destination": "https://2026.wedance.vip/docs/organization",
+      "permanent": true
+    },
+    {
+      "source": "/roles",
+      "destination": "https://2026.wedance.vip/docs/organization#join",
+      "permanent": true
+    },
+    {
+      "source": "/roles/:slug*",
+      "destination": "https://2026.wedance.vip/docs/organization#join",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/docs",
